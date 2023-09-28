@@ -6,14 +6,14 @@ import PersonalInfoCard from "./PersonalInfoCard";
 import { showServerError } from "../../App";
 
 export type QuestionType = {
-    question: string;
-    choices: ['string'],
-    disqualify: boolean,
-    id: string,
-    maxChoice: number,
-    other: boolean,
-    type: 'Paragraph' | ''
-}
+    question?: string;
+    choices?: ['string'],
+    disqualify?: boolean,
+    id?: string,
+    maxChoice?: number,
+    other?: boolean,
+    type: 'Paragraph' | '' | undefined;
+};
 
 type VisibilityOptionType = {mandatory: boolean, show: boolean};
 type VisibilityOptionTypeTwo = {internalUse: boolean, show: boolean};
@@ -60,9 +60,7 @@ function ApplicationForm() {
         });
     }, []);
     const updateApplicationData = (data: object) => {
-        fetch('http://127.0.0.1:4010/api/182.03157250969974/programs/iusto/application-form').then(res=>{
-            console.log(res);
-        }).catch( () => 
+        fetch('http://127.0.0.1:4010/api/182.03157250969974/programs/iusto/application-form').then(res=>res.json()).then(data=>console.log(data)).catch( () => 
             showServerError('update')
         );
         setApplicationData(data);

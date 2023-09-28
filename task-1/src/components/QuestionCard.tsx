@@ -1,10 +1,9 @@
-import { EditOutlined, PlusOutlined } from "@ant-design/icons";
-import { Button, Card, Checkbox, Layout, Space, Switch } from "antd";
+import { CaretDownOutlined, DownOutlined, EditOutlined, PlusOutlined } from "@ant-design/icons";
+import { Button, Card, Checkbox, Divider, Dropdown, Form, Input, Layout, Space, Switch, Typography } from "antd";
 import { CheckboxChangeEvent } from "antd/es/checkbox";
 import { SwitchChangeEventHandler } from "antd/es/switch";
 import { ReactNode, useState } from "react";
-import { QuestionType } from "../forms/applicationForm/ApplicationFrom";
-import EditSVG from "./EditSVG";
+import Question from "./Question";
 
 type ChildrenProp = {
     children?: ReactNode;
@@ -23,7 +22,7 @@ type DefaultQuestionPropType = ChildrenProp & {
     onCheckboxChange?: (e: CheckboxChangeEvent) => void,
 }
 
-const QuestionText = ({children}: ChildrenProp) => {
+export const QuestionText = ({children}: ChildrenProp) => {
     return <div className="question-text">{children}</div>
 }
 
@@ -40,17 +39,6 @@ const DefaultQuestion = ({children, mandatory, internalUse, show, onShowChange, 
             <Switch size="small" checked={show} onChange={onShowChange}/><span className="show-or-hide">{ show? 'show':'hide'}</span>
         </Space>}
     </Layout>
-};
-
-const Question = ({questionData}: {questionData: QuestionType}) => {
-    const [editing, setEditing] = useState();
-    return <>
-        {questionData!==undefined && <div>{questionData.type}</div>}
-        <Layout className="question-layout">
-            <QuestionText>{questionData?.question}</QuestionText>
-            <Button shape="circle" className="edit-button" type="text" icon={<EditSVG />} />
-        </Layout>
-    </>;
 };
 
 const QuestionCard = ({title, children}: QuestionCardProps) => {
